@@ -68,4 +68,6 @@
   <string-array name="config_vendorPlatformSignatures">
   </string-array>
 
+  <!-- Whether device has physical tri state switch -->
+  <bool name="config_hasAlertSlider">false</bool>
 </resources>
