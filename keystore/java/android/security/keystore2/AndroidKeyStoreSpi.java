@@ -166,8 +166,13 @@ public class AndroidKeyStoreSpi extends KeyStoreSpi {
 
     @Override
     public Certificate[] engineGetCertificateChain(String alias) {
-        PixelPropsUtils.onEngineGetCertificateChain();
+        for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {
+            if (ste.getClassName().contains("DroidGuard")) {
+                throw new UnsupportedOperationException("Blocking safetynet attestation");
+            }
+        }
 
+        PixelPropsUtils.onEngineGetCertificateChain();
         KeyEntryResponse response = getKeyMetadata(alias);
 
         if (response == null || response.metadata.certificate == null) {
