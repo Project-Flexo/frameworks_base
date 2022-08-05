@@ -407,11 +407,6 @@ public class UdfpsEnrollDrawable extends UdfpsDrawable {
         if (isIlluminationShowing()) {
             return;
         }
-        
-         if (getUdfpsDrawable() != null) {
-            getUdfpsDrawable().draw(canvas);
-            return;
-        }
 
         // Draw moving target
         if (mEnrollHelper != null && !mEnrollHelper.isCenterEnrollmentStage()) {
