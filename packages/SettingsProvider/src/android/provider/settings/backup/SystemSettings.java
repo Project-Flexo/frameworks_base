@@ -86,6 +86,5 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_LIGHT_PULSE,
         Settings.System.KEYGAURD_MEDIA_ART,
         Settings.System.VOLUME_PANEL_ON_LEFT,
-	Settings.System.SCREEN_OFF_FOD,
     };
 }
