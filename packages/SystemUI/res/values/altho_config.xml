@@ -15,4 +15,13 @@
 
    <!-- Whether to show VoLTE icon in the status bar -->
       <bool name="config_display_volte">true</bool>
+
+   <!-- Color of the UDFPS pressed view -->
+    <color name="config_udfpsColor">#ffffffff</color>
+
+   <!-- HBM type of UDFPS overlay.
+            0 - GLOBAL HBM
+            1 - LOCAL HBM
+    -->
+    <integer name="config_udfpsHbmType">1</integer>
 </resources>
