@@ -72,7 +72,7 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     private float mBurnInProgress;
     private float mInterpolatedDarkAmount;
 
-    private boolen mCustomUdfpsIcon;
+    private boolean mCustomUdfpsIcon;
     private boolean mCustomFpIconEnabled;
     private String customIconURI;
 
