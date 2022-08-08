@@ -5442,16 +5442,6 @@ public final class Settings {
         public static final String NOTIFICATION_MATERIAL_DISMISS_BGSTYLE = "notification_material_dismiss_bgstyle";
 
         /**
-         * @hide
-         */
-        public static final String OMNI_CUSTOM_FP_ICON_ENABLED = "custom_fp_icon_enabled";
-
-        /**
-         * @hide
-         */
-        public static final String OMNI_CUSTOM_FP_ICON = "custom_fingerprint_icon";
-
-        /**
          * Whether to display 4G icon instead LTE
          * @hide
          */

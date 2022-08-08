@@ -26,12 +26,10 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.View;
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -73,8 +71,6 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     private float mInterpolatedDarkAmount;
 
     private boolean mCustomUdfpsIcon;
-    private boolean mCustomFpIconEnabled;
-    private String customIconURI;
 
     public UdfpsKeyguardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -123,22 +119,6 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
         return true;
     }
 
-    private void updateIcon() {
-        mCustomUdfpsIcon = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.UDFPS_ICON, 0) != 0
-                && CustomUtils.isPackageInstalled(mContext, "com.custom.udfps.resources");
-        mCustomFpIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.OMNI_CUSTOM_FP_ICON_ENABLED, 0) == 1;
-        customIconURI = Settings.System.getStringForUser(getContext().getContentResolver(),
-                Settings.System.OMNI_CUSTOM_FP_ICON,
-                UserHandle.USER_CURRENT);
-
-        mBgProtection.setImageDrawable(mCustomUdfpsIcon ||
-                                      (!TextUtils.isEmpty(customIconURI) && mCustomFpIconEnabled)
-                ? mFingerprintDrawable :
-                getContext().getDrawable(R.drawable.fingerprint_bg));
-    }
-
     private void updateBurnInOffsets() {
         mBurnInOffsetX = MathUtils.lerp(0f,
             getBurnInOffset(mMaxBurnInOffsetX * 2, true /* xAxis */)
@@ -156,8 +136,7 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
         mLockScreenFp.setTranslationX(mBurnInOffsetX);
         mLockScreenFp.setTranslationY(mBurnInOffsetY);
         mLockScreenFp.setProgress(1f - mInterpolatedDarkAmount);
-        mLockScreenFp.setAlpha(mCustomUdfpsIcon ||
-                  (!TextUtils.isEmpty(customIconURI) && mCustomFpIconEnabled) ? 0.0f
+        mLockScreenFp.setAlpha(mCustomUdfpsIcon ? 0.0f
                 : (1f - mInterpolatedDarkAmount) * 255);
     }
 
@@ -193,8 +172,7 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     @Override
     protected int updateAlpha() {
         int alpha = super.updateAlpha();
-        mLockScreenFp.setAlpha(mCustomUdfpsIcon ||
-              (!TextUtils.isEmpty(customIconURI) && mCustomFpIconEnabled) ? 0.0f : alpha / 255f);
+        mLockScreenFp.setAlpha(mCustomUdfpsIcon ? 0.0f : alpha / 255f);
         if (mInterpolatedDarkAmount != 0f) {
             mBgProtection.setAlpha(1f - mInterpolatedDarkAmount);
         } else {
