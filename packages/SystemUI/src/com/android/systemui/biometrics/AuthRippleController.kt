@@ -284,17 +284,11 @@ class AuthRippleController @Inject constructor(
                 }
 
                 mView.setFingerprintSensorLocation(fingerprintSensorLocation!!, udfpsRadius)
-                if (Settings.System.getInt(sysuiContext.contentResolver,
-                       Settings.System.UDFPS_ANIM, 0) == 0) {
-                    showDwellRipple()
-                }
+                showDwellRipple()
             }
 
             override fun onFingerUp() {
-                if (Settings.System.getInt(sysuiContext.contentResolver,
-                        Settings.System.UDFPS_ANIM, 0) == 0) {
-                    mView.retractRipple()
-                }
+                mView.retractRipple()
             }
         }
 

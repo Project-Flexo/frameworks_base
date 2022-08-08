@@ -60,7 +60,6 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.util.custom.CustomUtils;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.R;
 import com.android.systemui.dagger.SysUISingleton;
@@ -170,12 +169,10 @@ public class UdfpsController implements DozeReceiver {
     private boolean mAttemptedToDismissKeyguard;
     private final int mUdfpsVendorCode;
     private Set<Callback> mCallbacks = new HashSet<>();
-
+    
     private boolean mDisableNightMode;
     private boolean mNightModeActive;
     private int mAutoModeState;
-
-    private UdfpsAnimation mUdfpsAnimation;
 
     @VisibleForTesting
     public static final AudioAttributes VIBRATION_SONIFICATION_ATTRIBUTES =
@@ -682,9 +679,6 @@ public class UdfpsController implements DozeReceiver {
         udfpsHapticsSimulator.setUdfpsController(this);
 
         mUdfpsVendorCode = mContext.getResources().getInteger(R.integer.config_udfps_vendor_code);
-        if (CustomUtils.isPackageInstalled(mContext, "com.custom.udfps.resources")) {
-            mUdfpsAnimation = new UdfpsAnimation(mContext, mWindowManager, mSensorProps);
-        }
         mDisableNightMode = mContext.getResources().getBoolean(com.android.internal.R.bool.config_udfpsDisableNightLight);
     }
 
@@ -858,12 +852,15 @@ public class UdfpsController implements DozeReceiver {
         mExecution.assertIsMainThread();
 
         final int reason = request.mRequestReason;
+<<<<<<< HEAD
 
         if (mUdfpsAnimation != null) {
             mUdfpsAnimation.setIsKeyguard(reason ==
                     BiometricOverlayConstants.REASON_AUTH_KEYGUARD);
         }
 
+=======
+>>>>>>> parent of e77a4eb3ef69... [SQUASH] Bring back Udfps icons and animations [1/3]
         if (mView == null) {
             try {
                 Log.v(TAG, "showUdfpsOverlay | adding window reason=" + reason);
@@ -1096,9 +1093,6 @@ public class UdfpsController implements DozeReceiver {
         for (Callback cb : mCallbacks) {
             cb.onFingerDown();
         }
-        if (mUdfpsAnimation != null) {
-            mUdfpsAnimation.show();
-        }
     }
 
     private void onFingerUp() {
@@ -1114,9 +1108,6 @@ public class UdfpsController implements DozeReceiver {
             for (Callback cb : mCallbacks) {
                 cb.onFingerUp();
             }
-        }
-        if (mUdfpsAnimation != null) {
-            mUdfpsAnimation.hide();
         }
         mOnFingerDown = false;
         if (mView.isIlluminationRequested()) {
