@@ -5441,7 +5441,6 @@ public final class Settings {
          */
         public static final String NOTIFICATION_MATERIAL_DISMISS_BGSTYLE = "notification_material_dismiss_bgstyle";
 
-
         /**
          * @hide
          */
@@ -8075,6 +8074,13 @@ public final class Settings {
         public static final String ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS =
                 "accessibility_interactive_ui_timeout_ms";
 
+
+        /**
+         * Whether to show the lyric on the status bar
+         * @hide
+         */
+        @Readable
+        public static final String STATUS_BAR_SHOW_LYRIC = "status_bar_show_lyric";
 
         /**
          * Setting that specifies whether Reduce Bright Colors, or brightness dimming by color

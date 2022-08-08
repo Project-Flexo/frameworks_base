@@ -118,6 +118,7 @@ public interface NotificationsModule {
             Lazy<NotificationRemoteInputManager> notificationRemoteInputManagerLazy,
             LeakDetector leakDetector,
             ForegroundServiceDismissalFeatureController fgsFeatureController,
+            NotificationEntryManager.KeyguardEnvironment keyguardEnvironment,
             IStatusBarService statusBarService,
             DumpManager dumpManager) {
         return new NotificationEntryManager(
@@ -129,6 +130,7 @@ public interface NotificationsModule {
                 leakDetector,
                 fgsFeatureController,
                 statusBarService,
+                keyguardEnvironment,
                 dumpManager);
     }
 
