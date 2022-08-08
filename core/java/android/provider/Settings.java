@@ -5725,6 +5725,12 @@ public final class Settings {
         @Readable
         public static final String WHEN_TO_MAKE_WIFI_CALLS = "when_to_make_wifi_calls";
 
+        * Whether to show battery estimates in QS
+         * @hide
+         */
+        @Readable
+        public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
+
         // Settings moved to Settings.Secure
 
         /**
