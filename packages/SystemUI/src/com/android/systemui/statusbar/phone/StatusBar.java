@@ -4209,6 +4209,21 @@ public class StatusBar extends SystemUI implements
         return mDeviceInteractive;
     }
 
+    private SbSettingsObserver mSbSettingsObserver = new SbSettingsObserver(mMainHandler);
+    private class SbSettingsObserver extends ContentObserver {
+        SbSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+    void observe() {
+        resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+     public void update() {
+        setUseLessBoringHeadsUp();
+        }
     public boolean isNotificationForCurrentProfiles(StatusBarNotification n) {
         final int notificationUserId = n.getUserId();
         if (DEBUG && MULTIUSER_DEBUG) {
@@ -4216,6 +4231,13 @@ public class StatusBar extends SystemUI implements
                     mLockscreenUserManager.getCurrentUserId(), notificationUserId));
         }
         return mLockscreenUserManager.isCurrentProfile(notificationUserId);
+    }
+
+    private void setUseLessBoringHeadsUp() {
+        boolean lessBoringHeadsUp = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LESS_BORING_HEADS_UP, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mNotificationInterruptStateProvider.setUseLessBoringHeadsUp(lessBoringHeadsUp);
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
