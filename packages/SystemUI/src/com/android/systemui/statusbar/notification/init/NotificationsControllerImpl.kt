@@ -129,8 +129,6 @@ class NotificationsControllerImpl @Inject constructor(
             groupAlertTransferHelper.setHeadsUpManager(headsUpManager)
 
             entryManager.initialize(notificationListener, legacyRanker)
-            entryManager.setStatusBar(statusBar)
-            headsUpController.setStatusBar(statusBar)
         }
 
         peopleSpaceWidgetManager.attach(notificationListener)

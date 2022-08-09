@@ -46,7 +46,6 @@ import com.android.systemui.statusbar.phone.NotificationPanelView;
 import com.android.systemui.statusbar.phone.NotificationPanelViewController;
 import com.android.systemui.statusbar.phone.NotificationShadeWindowView;
 import com.android.systemui.statusbar.phone.NotificationsQuickSettingsContainer;
-import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.statusbar.phone.StatusBarHideIconsForBouncerManager;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.phone.StatusBarLocationPublisher;
@@ -63,12 +62,10 @@ import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.util.settings.SecureSettings;
 
-import java.util.Optional;
 import java.util.concurrent.Executor;
 
 import javax.inject.Named;
 
-import dagger.Lazy;
 import dagger.Module;
 import dagger.Provides;
 
@@ -255,7 +252,6 @@ public abstract class StatusBarViewModule {
             NotificationIconAreaController notificationIconAreaController,
             PanelExpansionStateManager panelExpansionStateManager,
             FeatureFlags featureFlags,
-            Lazy<Optional<StatusBar>> statusBarOptionalLazy,
             StatusBarIconController statusBarIconController,
             StatusBarHideIconsForBouncerManager statusBarHideIconsForBouncerManager,
             KeyguardStateController keyguardStateController,
@@ -275,7 +271,6 @@ public abstract class StatusBarViewModule {
                 notificationIconAreaController,
                 panelExpansionStateManager,
                 featureFlags,
-                statusBarOptionalLazy,
                 statusBarIconController,
                 statusBarHideIconsForBouncerManager,
                 keyguardStateController,
