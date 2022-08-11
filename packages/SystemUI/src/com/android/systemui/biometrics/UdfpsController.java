@@ -679,7 +679,6 @@ public class UdfpsController implements DozeReceiver {
         udfpsHapticsSimulator.setUdfpsController(this);
 
         mUdfpsVendorCode = mContext.getResources().getInteger(R.integer.config_udfps_vendor_code);
-        mDisableNightMode = mContext.getResources().getBoolean(com.android.internal.R.bool.config_udfpsDisableNightLight);
     }
 
     private void disableNightMode() {
@@ -852,15 +851,7 @@ public class UdfpsController implements DozeReceiver {
         mExecution.assertIsMainThread();
 
         final int reason = request.mRequestReason;
-<<<<<<< HEAD
 
-        if (mUdfpsAnimation != null) {
-            mUdfpsAnimation.setIsKeyguard(reason ==
-                    BiometricOverlayConstants.REASON_AUTH_KEYGUARD);
-        }
-
-=======
->>>>>>> parent of e77a4eb3ef69... [SQUASH] Bring back Udfps icons and animations [1/3]
         if (mView == null) {
             try {
                 Log.v(TAG, "showUdfpsOverlay | adding window reason=" + reason);

@@ -16,4 +16,7 @@
    <!-- Whether to show VoLTE icon in the status bar -->
       <bool name="config_display_volte">true</bool>
 
+   <!-- Udfps HBM provider class name -->
+   <string name="config_udfpsHbmProviderComponent">com.android.systemui.biometrics.DummyUdfpsHbmProvider</string>
+
 </resources>

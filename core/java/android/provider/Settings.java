@@ -5443,18 +5443,6 @@ public final class Settings {
 
 
         /**
-         * Switch between filters for lockscreen album art
-         * @hide
-         */
-        public static final String LOCKSCREEN_ALBUMART_FILTER = "lockscreen_albumart_filter";
-
-        /**
-         * Whether to show heads up only for dialer and sms apps
-         * @hide
-         */
-        public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
-
-        /**
          * Whether to display 4G icon instead LTE
          * @hide
          */
@@ -5732,7 +5720,8 @@ public final class Settings {
         @Readable
         public static final String WHEN_TO_MAKE_WIFI_CALLS = "when_to_make_wifi_calls";
 
-        * Whether to show battery estimates in QS
+        /**
+         * Whether to show battery estimates in QS
          * @hide
          */
         @Readable

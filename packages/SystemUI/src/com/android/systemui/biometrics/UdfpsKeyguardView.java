@@ -67,11 +67,6 @@ public class UdfpsKeyguardView extends UdfpsAnimationView {
     private float mBurnInProgress;
     private float mInterpolatedDarkAmount;
 
-<<<<<<< HEAD
-    private boolean mCustomUdfpsIcon;
-
-=======
->>>>>>> parent of e77a4eb3ef69... [SQUASH] Bring back Udfps icons and animations [1/3]
     public UdfpsKeyguardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mFingerprintDrawable = new UdfpsFpDrawable(context);

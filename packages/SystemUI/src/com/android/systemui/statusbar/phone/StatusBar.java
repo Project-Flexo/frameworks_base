@@ -63,6 +63,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -72,6 +73,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.metrics.LogMaker;
@@ -4001,29 +4003,6 @@ public class StatusBar extends SystemUI implements
 
     public boolean isDeviceInteractive() {
         return mDeviceInteractive;
-    }
-
-    private SbSettingsObserver mSbSettingsObserver = new SbSettingsObserver(mMainHandler);
-    private class SbSettingsObserver extends ContentObserver {
-        SbSettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-    void observe() {
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.LESS_BORING_HEADS_UP),
-                    false, this, UserHandle.USER_ALL);
-        }
-
-     public void update() {
-        setUseLessBoringHeadsUp();
-        }
-
-    private void setUseLessBoringHeadsUp() {
-        boolean lessBoringHeadsUp = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.LESS_BORING_HEADS_UP, 0,
-                UserHandle.USER_CURRENT) == 1;
-        mNotificationInterruptStateProvider.setUseLessBoringHeadsUp(lessBoringHeadsUp);
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {

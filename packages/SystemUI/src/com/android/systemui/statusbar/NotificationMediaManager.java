@@ -48,7 +48,6 @@ import android.widget.ImageView;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
-import com.android.internal.util.custom.ImageHelper;
 import com.android.systemui.animation.Interpolators;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
 import com.android.systemui.dagger.qualifiers.Main;
@@ -75,6 +74,7 @@ import com.android.systemui.statusbar.phone.ScrimController;
 import com.android.systemui.statusbar.phone.ScrimState;
 import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.tuner.TunerService;
 import com.android.systemui.util.Utils;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 
@@ -105,8 +105,7 @@ public class NotificationMediaManager implements Dumpable {
             KeyguardStateController.class);
     private final KeyguardBypassController mKeyguardBypassController;
     private static final HashSet<Integer> PAUSED_MEDIA_STATES = new HashSet<>();
-    private static final String LOCKSCREEN_ALBUMART_FILTER =
-            "system:" + Settings.System.LOCKSCREEN_ALBUMART_FILTER;
+
     static {
         PAUSED_MEDIA_STATES.add(PlaybackState.STATE_NONE);
         PAUSED_MEDIA_STATES.add(PlaybackState.STATE_STOPPED);
@@ -148,7 +147,6 @@ public class NotificationMediaManager implements Dumpable {
     private ImageView mBackdropFront;
     private ImageView mBackdropBack;
 
-    private int mAlbumArtFilter;
 
     private final MediaController.Callback mMediaListener = new MediaController.Callback() {
         @Override
@@ -216,23 +214,8 @@ public class NotificationMediaManager implements Dumpable {
 
         dumpManager.registerDumpable(this);
 
-       final TunerService tunerService = Dependency.get(TunerService.class);
-
-        tunerService.addTunable(this, LOCKSCREEN_ALBUMART_FILTER);
     }
 
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-           case LOCKSCREEN_ALBUMART_FILTER:
-                mAlbumArtFilter =
-                        TunerService.parseInteger(newValue, 0);
-                dispatchUpdateMediaMetaData(false /* changed */, true /* allowAnimation */);
-                break;
-            default:
-                break;
-        }
-    }
     private void setupNotifPipeline() {
         mNotifPipeline.addCollectionListener(new NotifCollectionListener() {
             @Override
@@ -668,30 +651,6 @@ public class NotificationMediaManager implements Dumpable {
         Drawable artworkDrawable = null;
         if (bmp != null) {
             artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), bmp);
-
-        switch (mAlbumArtFilter) {
-                case 0:
-                default:
-                    artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), bmp);
-                    break;
-                case 1:
-                    artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(),
-                        ImageHelper.toGrayscale(bmp));
-                    break;
-                case 2:
-                    Drawable aw = new BitmapDrawable(mBackdropBack.getResources(), bmp);
-                    artworkDrawable = new BitmapDrawable(ImageHelper.getColoredBitmap(aw,
-                        mContext.getResources().getColor(R.color.accent_device_default_light)));
-                    break;
-                case 3:
-                    artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(),
-                        ImageHelper.getBlurredImage(mContext, bmp, 7.0f));
-                    break;
-                case 4:
-                    artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(),
-                        ImageHelper.getGrayscaleBlurredImage(mContext, bmp, 7.0f));
-                    break;
-            }
 
 
         }

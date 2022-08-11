@@ -69,7 +69,6 @@ import com.android.systemui.statusbar.policy.IndividualSensorPrivacyControllerIm
 import com.android.systemui.statusbar.policy.SensorPrivacyController;
 import com.android.systemui.statusbar.policy.SensorPrivacyControllerImpl;
 import com.android.systemui.volume.dagger.VolumeModule;
-import com.android.systemui.R;
 
 import javax.inject.Named;
 
@@ -196,17 +195,6 @@ public abstract class SystemUIDefaultModule {
         return deviceProvisionedController;
     }
     
-    @Provides
-    static UdfpsHbmProvider getUdfpsHbmProvider(Context context) {
-        String className = context.getString(R.string.config_udfpsHbmProviderComponent);
-        try {
-            Class<?> clazz = context.getClassLoader().loadClass(className);
-            return (UdfpsHbmProvider) clazz.getDeclaredConstructor(
-                    new Class[] { Context.class }).newInstance(context);
-        } catch (Throwable t) {
-            throw new RuntimeException("Error loading UdfpsHbmProvider " + className, t);
-        }
-    }
 
     @Binds
     abstract KeyguardViewController bindKeyguardViewController(

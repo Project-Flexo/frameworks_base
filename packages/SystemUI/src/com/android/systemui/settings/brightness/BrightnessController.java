@@ -494,7 +494,7 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
         }
 
         /** Create a {@link BrightnessController} */
-        public BrightnessController create(ImageView Icon,ToggleSlider toggleSlider) {
+        public BrightnessController create(ImageView icon,ToggleSlider toggleSlider) {
             return new BrightnessController(
                     mContext,
                     icon,

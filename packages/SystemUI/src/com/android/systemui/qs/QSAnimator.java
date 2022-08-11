@@ -458,7 +458,6 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
             int translationY = getRelativeTranslationY(qsBrightness, qqsBrightness);
             mBrightnessAnimator = new Builder()
                     .addFloat(qqsBrightness, "translationY", 0, translationY)
-                    .build();
                     .setInterpolator(new DecelerateInterpolator(1.2f))
                     .setEndDelay(0.1f)
                     .build();
