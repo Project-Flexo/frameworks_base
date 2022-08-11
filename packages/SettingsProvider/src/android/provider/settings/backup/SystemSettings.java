@@ -87,5 +87,6 @@ public class SystemSettings {
         Settings.System.KEYGAURD_MEDIA_ART,
         Settings.System.VOLUME_PANEL_ON_LEFT,
         Settings.System.QS_SHOW_BATTERY_ESTIMATE,
+        Settings.System.AUTO_BRIGHTNESS_ONE_SHOT,
     };
 }
