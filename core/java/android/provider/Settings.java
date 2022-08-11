@@ -5442,6 +5442,12 @@ public final class Settings {
         public static final String NOTIFICATION_MATERIAL_DISMISS_BGSTYLE = "notification_material_dismiss_bgstyle";
 
         /**
+         * Whether to force small clock on keyguard
+         * @hide
+         */
+        public static final String LOCKSCREEN_SMALL_CLOCK = "lockscreen_small_clock";
+
+        /**
          * Whether to show power menu on LockScreen
          * @hide
          */
