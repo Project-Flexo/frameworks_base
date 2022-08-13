@@ -516,6 +516,8 @@ public class NotificationPanelViewController extends PanelViewController {
      */
     private int mLockscreenNotificationQSPadding;
 
+    private int mOneFingerQuickSettingsIntercept;
+
     /**
      * The amount of progress we are currently in if we're transitioning to the full shade.
      * 0.0f means we're not transitioning yet, while 1 means we're all the way in the full
@@ -1978,7 +1980,22 @@ public class NotificationPanelViewController extends PanelViewController {
                         MotionEvent.BUTTON_SECONDARY) || event.isButtonPressed(
                         MotionEvent.BUTTON_TERTIARY));
 
-        return twoFingerDrag || stylusButtonClickDrag || mouseButtonClickDrag;
+        final float w = mView.getMeasuredWidth();
+        final float x = event.getX();
+        float region = w * 1.f / 4.f; // TODO overlay region fraction?
+        boolean showQsOverride = false;
+
+        switch (mOneFingerQuickSettingsIntercept) {
+            case 1: // Right side pulldown
+                showQsOverride = mView.isLayoutRtl() ? x < region : w - region < x;
+                break;
+            case 2: // Left side pulldown
+                showQsOverride = mView.isLayoutRtl() ? w - region < x : x < region;
+                break;
+        }
+        showQsOverride &= mBarState == StatusBarState.SHADE;
+
+        return twoFingerDrag || showQsOverride || stylusButtonClickDrag || mouseButtonClickDrag;
     }
 
     private void handleQsDown(MotionEvent event) {
@@ -3789,6 +3806,10 @@ public class NotificationPanelViewController extends PanelViewController {
         mNotificationShelfController = notificationShelfController;
         mLockscreenShadeTransitionController.bindController(notificationShelfController);
         updateMaxDisplayedNotifications(true);
+    }
+
+    public void setQsQuickPulldown(int mode) {
+        mOneFingerQuickSettingsIntercept = mode;
     }
 
     public void setAlpha(float alpha) {

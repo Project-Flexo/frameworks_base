@@ -699,8 +699,10 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
             return;
         }
 
-        if (mCurrentSetColor != NO_COLOR) {
-            if (mMatrixColorFilter == null) {
+        if (mNotification == null) return;
+        if (mNotification.getPackageName().contains("systemui") || !mNewIconStyle) {
+           if (mCurrentSetColor != NO_COLOR) {
+             if (mMatrixColorFilter == null) {
                 mMatrix = new float[4 * 5];
                 mMatrixColorFilter = new ColorMatrixColorFilter(mMatrix);
             }
@@ -720,7 +722,8 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
      * Updates {@param array} such that it represents a matrix that changes RGB to {@param color}
      * and multiplies the alpha channel with the color's alpha+{@param alphaBoost}.
      */
-    private static void updateTintMatrix(float[] array, int color, float alphaBoost) {
+
+     private static void updateTintMatrix(float[] array, int color, float alphaBoost) {
         Arrays.fill(array, 0);
         array[4] = Color.red(color);
         array[9] = Color.green(color);
