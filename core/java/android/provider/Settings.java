@@ -5442,6 +5442,12 @@ public final class Settings {
         public static final String NOTIFICATION_MATERIAL_DISMISS_BGSTYLE = "notification_material_dismiss_bgstyle";
 
         /**
+         * Whether to display the torch option in the power menu
+         * @hide
+         */
+        public static final String POWERMENU_TORCH = "powermenu_torch";
+
+        /**
          * Whether to enable or disable vibration on succesful fingerprint auth
          * @hide
          */

@@ -17,5 +17,6 @@
         <item>power</item>
         <item>restart</item>
         <item>logout</item>
+        <item>torch</item>
     </string-array>
 </resources>
