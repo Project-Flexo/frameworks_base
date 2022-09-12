@@ -83,7 +83,7 @@ open class QSTileViewImpl @JvmOverloads constructor(
         }
 
     private val colorActive = Utils.getColorAttrDefaultColor(context,
-            android.R.attr.colorAccent)
+            com.android.internal.R.attr.colorAccentPrimary)
     private val colorInactive = resources.getColor(R.color.qs_translucent_bg)
     private val colorUnavailable = Utils.applyAlpha(UNAVAILABLE_ALPHA, colorInactive)
 
