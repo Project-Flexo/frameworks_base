@@ -825,8 +825,8 @@ public final class SystemServer implements Dumpable {
             }
 
             Slog.i("halogenOS",
-                "Welcome to halogenOS! We believe that you'll love it. " +
-                "Ready to... uh... Q!");
+                "Welcome to Flexo! We believe that you'll love it. " +
+                "Ready to... uh... Flex!");
 
             // In case the runtime switched since last boot (such as when
             // the old runtime was removed in an OTA), set the system
