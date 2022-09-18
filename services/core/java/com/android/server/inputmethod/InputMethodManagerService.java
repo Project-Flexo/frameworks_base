@@ -196,7 +196,7 @@ import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.utils.PriorityDump;
 import com.android.server.wm.WindowManagerInternal;
 
-import com.android.internal.derp.hardware.LineageHardwareManager;
+import com.android.internal.custom.hardware.LineageHardwareManager;
 
 import com.google.android.collect.Sets;
 
