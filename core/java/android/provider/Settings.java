@@ -5852,6 +5852,13 @@ public final class Settings {
          * @hide
          */
         public static final String FINGERPRINT_WAKE_UNLOCK = "fingerprint_wake_unlock";
+        
+        /**
+         * Disable power menu on secure lock screens
+         *
+         * @hide
+         */
+        public static final String LOCK_POWER_MENU_DISABLED = "lockscreen_power_menu_disabled";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
