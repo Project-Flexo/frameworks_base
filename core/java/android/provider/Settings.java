@@ -11278,6 +11278,14 @@ public final class Settings {
          * @hide
          */
         public static final String FEATURE_TOUCH_HOVERING = "feature_touch_hovering";
+        
+        /**
+         * Enable udfps detection even when screen is off
+         * Default value is 0
+         * @hide
+         */
+        @Readable
+        public static final String SCREEN_OFF_UDFPS_ENABLED = "screen_off_udfps_enabled";
 
         /**
          * These entries are considered common between the personal and the managed profile,
