@@ -5945,6 +5945,12 @@ public final class Settings {
          * @hide
          */
         public static final String QS_FOOTER_WARNINGS = "qs_footer_warnings";
+        
+        /**
+         * Whether to show qs footer text
+         * @hide
+         */
+        public static final String QS_FOOTER_TEXT_SHOW = "qs_footer_text_show";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
