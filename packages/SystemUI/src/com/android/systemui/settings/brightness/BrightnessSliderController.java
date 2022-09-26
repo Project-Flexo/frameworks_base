@@ -39,7 +39,7 @@ import javax.inject.Inject;
 /**
  * {@code ViewController} for a {@code BrightnessSliderView}
  *
- * This class allows to control the views of a {@code BrightnessSliderViewView} and get callbacks
+ * This class allows to control the views of a {@code BrightnessSliderView} and get callbacks
  * when the views change value. It also propagates and manipulates another {@link ToggleSlider} as a
  * mirror.
  *
@@ -258,16 +258,10 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
          *                 hierarchy will not be attached
          */
         public BrightnessSliderController create(Context context, @Nullable ViewGroup viewRoot) {
-            int layout = getLayout();
-            BrightnessSliderView root = (BrightnessSliderView) LayoutInflater.from(context)
-                    .inflate(layout, viewRoot, false);
+            final BrightnessSliderView root = (BrightnessSliderView) LayoutInflater.from(context)
+                    .inflate(R.layout.quick_settings_brightness_dialog, viewRoot, false);
             ImageView icon = (ImageView) root.findViewById(R.id.brightness_icon);
             return new BrightnessSliderController(root, icon, mFalsingManager);
-        }
-
-        /** Get the layout to inflate based on what slider to use */
-        private int getLayout() {
-            return R.layout.quick_settings_brightness_dialog;
         }
     }
 }

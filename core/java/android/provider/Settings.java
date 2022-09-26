@@ -5907,6 +5907,28 @@ public final class Settings {
          * @hide
          */
         public static final String RETICKER_LANDSCAPE_ONLY = "reticker_landscape_only";
+        
+        /**
+         * Whether to show brightness slider in qqs.
+         * Default 0.
+         * @hide
+         */
+        public static final String QQS_SHOW_BRIGHTNESS = "qqs_show_brightness";
+
+        /**
+         * Whether to show auto brightness button to the end of brightness slider.
+         * Default 0.
+         * @hide
+         */
+        public static final String SHOW_AUTO_BRIGHTNESS_BUTTON = "show_auto_brightness_button";
+
+        /**
+         * Position of the brightness slider (applies to qqs as well).
+         * 0 - Top (Default).
+         * 1 - Bottom.
+         * @hide
+         */
+        public static final String BRIGHTNESS_SLIDER_POSITION = "brightness_slider_position";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
