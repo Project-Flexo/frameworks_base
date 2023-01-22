@@ -238,6 +238,7 @@ import com.android.systemui.statusbar.phone.panelstate.PanelExpansionChangeEvent
 import com.android.systemui.statusbar.phone.panelstate.PanelExpansionStateManager;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
+import com.android.systemui.statusbar.policy.BurnInProtectionController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
@@ -491,6 +492,7 @@ public class CentralSurfacesImpl extends CoreStartable implements
     @Nullable
     protected LockscreenWallpaper mLockscreenWallpaper;
     private final AutoHideController mAutoHideController;
+    private BurnInProtectionController mBurnInProtectionController;
 
     private final Point mCurrentDisplaySize = new Point();
 
@@ -1262,6 +1264,12 @@ public class CentralSurfacesImpl extends CoreStartable implements
                     mNotificationPanelViewController.updatePanelExpansionAndVisibility();
                     setBouncerShowingForStatusBarComponents(mBouncerShowing);
                     checkBarModes();
+
+                    if (mContext.getResources().getBoolean(
+                            com.android.internal.R.bool.config_enableBurnInProtection)) {
+                        mBurnInProtectionController = new BurnInProtectionController(mContext,
+                                this, mStatusBarView);
+                    }
                 });
         initializer.initializeStatusBar(mCentralSurfacesComponent);
 
@@ -3851,6 +3859,9 @@ public class CentralSurfacesImpl extends CoreStartable implements
 
             updateNotificationPanelTouchState();
             mNotificationShadeWindowViewController.cancelCurrentTouch();
+            if (mBurnInProtectionController != null) {
+                mBurnInProtectionController.stopShiftTimer(true);
+            }
             if (mLaunchCameraOnFinishedGoingToSleep) {
                 mLaunchCameraOnFinishedGoingToSleep = false;
 
@@ -3955,6 +3966,9 @@ public class CentralSurfacesImpl extends CoreStartable implements
                 }
             }
             updateScrimController();
+            if (mBurnInProtectionController != null) {
+                mBurnInProtectionController.stopShiftTimer(true);
+            }
         }
     };
 

@@ -52,4 +52,7 @@
     <dimen name="right_tri_state_up_top_left_radius">24.0dip</dimen>
     <dimen name="right_tri_state_up_top_right_radius">24.0dip</dimen>
 
+    <!-- BurnIn protection -->
+    <dimen name="burnin_protection_horizontal_shift">3dp</dimen>
+    <dimen name="burnin_protection_vertical_shift">1dp</dimen>
 </resources>
